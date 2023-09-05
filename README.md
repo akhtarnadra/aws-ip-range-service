@@ -44,7 +44,7 @@ java -jar target/aws-ip-range-service-0.0.1-SNAPSHOT.jar
 
 ### Retrieve AWS IP Ranges
 
-To retrieve AWS IP ranges, make a GET request to the `/ip-ranges` endpoint. You can filter the ranges by region using the `region` query parameter. Valid region values are `EU`, `US`, `AP`, `CN`, `SA`, `AF`, `CA`, or `ALL` (to retrieve all regions).
+To retrieve AWS IP ranges, make a GET request to the `/aws-region-ip-ranges` endpoint. You can filter the ranges by region using the `region` query parameter. Valid region values are `EU`, `US`, `AP`, `CN`, `SA`, `AF`, `CA`, or `ALL` (to retrieve all regions).
 Example request:
 
 # curl -X GET http://localhost:8080/aws-ip-range-service-service/api/aws-ip-range/v1/aws-region-ip-ranges?region=EU
