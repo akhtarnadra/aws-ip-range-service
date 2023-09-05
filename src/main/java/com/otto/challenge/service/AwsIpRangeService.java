@@ -25,7 +25,7 @@ import static com.otto.challenge.constants.GlobalApplicationConstants.NO_DATA_AV
 public class AwsIpRangeService {
 
     @Value("${aws.ip.ranges.url}")
-    private String awsIpRangesUrl;
+    private final String awsIpRangesUrl;
     private final RestTemplate restTemplate;
 
     @Cacheable(key = "#region.name()")
