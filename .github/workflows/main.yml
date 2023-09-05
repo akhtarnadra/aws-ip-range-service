@@ -1,4 +1,4 @@
-name: CI/CD
+name: GitActions Pipeline for aws-ip-range-service
 
 on:
   push:
