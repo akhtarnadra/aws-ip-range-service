@@ -27,11 +27,11 @@ Before running the application, make sure you have the following prerequisites i
    https://github.com/akhtarnadra/aws-ip-range-service.git
    
 ## Build the project:
-cd spring-boot-aws-ip-range-filter
+cd aws-ip-range-service
 mvn clean package
 
 ## Run the application:
-java -jar target/spring-boot-aws-ip-range-filter.jar
+java -jar target/aws-ip-range-service-0.0.1-SNAPSHOT.jar
 
 ## Configuration
 
@@ -47,7 +47,7 @@ java -jar target/spring-boot-aws-ip-range-filter.jar
 To retrieve AWS IP ranges, make a GET request to the `/ip-ranges` endpoint. You can filter the ranges by region using the `region` query parameter. Valid region values are `EU`, `US`, `AP`, `CN`, `SA`, `AF`, `CA`, or `ALL` (to retrieve all regions).
 Example request:
 
-# curl -X GET http://localhost:8080/ip-ranges?region=US
+# curl -X GET http://localhost:8080/aws-ip-range-service-service/api/aws-ip-range/v1/aws-region-ip-ranges?region=EU
 Response
 # The application will respond with a plain text list of IP prefixes:
 3.2.34.0/26
