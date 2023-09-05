@@ -4,8 +4,10 @@ import com.otto.challenge.model.IpRange;
 import com.otto.challenge.model.IpRangesResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
@@ -15,6 +17,7 @@ import static com.otto.challenge.constants.TestConstants.AWS_IP_RANGE_SERVICE_AP
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
+@ExtendWith(SpringExtension.class)
 public class AwsIpRangeServiceTest {
 
     private AwsIpRangeService awsIpRangeService;
@@ -23,7 +26,7 @@ public class AwsIpRangeServiceTest {
     @BeforeEach
     public void setUp() {
         restTemplate = Mockito.mock(RestTemplate.class);
-        awsIpRangeService = new AwsIpRangeService(AWS_IP_RANGE_SERVICE_API, restTemplate);
+        awsIpRangeService = new AwsIpRangeService(restTemplate, AWS_IP_RANGE_SERVICE_API);
     }
 
     @Test
