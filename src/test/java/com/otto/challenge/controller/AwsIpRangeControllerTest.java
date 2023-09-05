@@ -1,5 +1,6 @@
 package com.otto.challenge.controller;
 
+import com.otto.challenge.model.Region;
 import com.otto.challenge.service.AwsIpRangeService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -32,12 +34,24 @@ public class AwsIpRangeControllerTest {
         List<String> sampleIpRanges = Arrays.asList("10.0.0.0/24", "192.168.0.0/24");
 
         // Mock the behavior of the service method
-        when(awsIpRangeService.getIpRangesByRegion(null)).thenReturn(sampleIpRanges);
+        when(awsIpRangeService.getIpRangesByRegion(Region.EU)).thenReturn(sampleIpRanges);
+
+        AwsIpRangeController awsIpRangeController = new AwsIpRangeController(awsIpRangeService);
+        ResponseEntity<String> responseEntity = awsIpRangeController.getIpRangesByRegion(Region.EU);
+
+        assertEquals(200, responseEntity.getStatusCodeValue());
+        assertEquals("10.0.0.0/24\n192.168.0.0/24", responseEntity.getBody());
+    }
+
+    @Test
+    public void testGetIpRangesByAnInvalidRegion() {
+        // Mock the behavior of the service method for an invalid region
+        when(awsIpRangeService.getIpRangesByRegion(null)).thenReturn(Collections.emptyList());
 
         AwsIpRangeController awsIpRangeController = new AwsIpRangeController(awsIpRangeService);
         ResponseEntity<String> responseEntity = awsIpRangeController.getIpRangesByRegion(null);
 
         assertEquals(200, responseEntity.getStatusCodeValue());
-        assertEquals("10.0.0.0/24\n192.168.0.0/24", responseEntity.getBody());
+        assertEquals("", responseEntity.getBody());
     }
 }

@@ -55,16 +55,12 @@ public class AwsIpRangeServiceTest {
 
         // Then
         // Test the service method
-        List<String> ipRanges = awsIpRangeService.getIpRangesByRegion(null);
-        assertEquals(2, ipRanges.size());
+        List<String> ipRanges = awsIpRangeService.getIpRangesByRegion(Region.EU);
+        assertEquals(1, ipRanges.size());
     }
 
     @Test
     public void testGetIpRangesByRegionWithException() {
-        // Given
-        // Inject the value of awsIpRangesUrl into the service using ReflectionTestUtils
-        ReflectionTestUtils.setField(awsIpRangeService, REFLECTION_FIELD_NAME, AWS_IP_RANGE_SERVICE_API);
-
         // When
         // Mock the behavior of the RestTemplate to throw an exception
         when(restTemplate.getForEntity(AWS_IP_RANGE_SERVICE_API, ResponseEntity.class)).thenThrow(new RuntimeException(TEST_EXCEPTION));
@@ -72,7 +68,7 @@ public class AwsIpRangeServiceTest {
         // Throws
         // Test the service method, expecting an exception
         assertThrows(RuntimeException.class, () -> {
-            awsIpRangeService.getIpRangesByRegion(Region.ALL);
+            awsIpRangeService.getIpRangesByRegion(null);
         });
     }
 }

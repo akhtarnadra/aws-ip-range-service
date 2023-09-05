@@ -37,7 +37,7 @@ public class AwsIpRangeService {
         regionToApiRegionMap.put(Region.CN, "cn-north-1");
         regionToApiRegionMap.put(Region.CA, "ca-central-1");
         regionToApiRegionMap.put(Region.SA, "sa-east-1");
-        regionToApiRegionMap.put(Region.ALL, Region.EU + ","+ Region.US + ","+ Region.AF + ","+ Region.AP + ","+ Region.CN + ","+ Region.CA + ","+ Region.SA);
+        regionToApiRegionMap.put(Region.ALL, Region.EU + "," + Region.US + "," + Region.AF + "," + Region.AP + "," + Region.CN + "," + Region.CA + "," + Region.SA);
     }
 
     @Cacheable(key = "#region.name()")
@@ -61,7 +61,7 @@ public class AwsIpRangeService {
         return completableFuture.join();
     }
 
-    private static List<String> getFilteredIpRanges(Region region, List<IpRange> ipRanges) {
+    private List<String> getFilteredIpRanges(Region region, List<IpRange> ipRanges) {
         Set<String> validRegions = region == null ? Collections.emptySet()
                 : new HashSet<>(Arrays.asList(mapToApiRegionName(region).split(",")));
 
@@ -72,7 +72,7 @@ public class AwsIpRangeService {
         return filteredIpRanges;
     }
 
-    private static String mapToApiRegionName(Region region) {
+    private String mapToApiRegionName(Region region) {
         return regionToApiRegionMap.getOrDefault(region, null);
     }
 }
